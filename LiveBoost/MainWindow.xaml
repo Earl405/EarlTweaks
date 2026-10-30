@@ -1,0 +1,515 @@
+<Window x:Class="LiveBoost.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EarlTweaks FPS Optimizer" Icon="Tools/EARL_TWEAKS.ico" Width="1180" Height="760" MinWidth="980" MinHeight="640"
+        Background="{StaticResource Bg}" Foreground="{StaticResource Text}" FontFamily="Segoe UI">
+  <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="104"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+
+    <Border Background="{StaticResource Panel}">
+      <DockPanel Margin="0,12">
+        <Button x:Name="NavSettings" DockPanel.Dock="Bottom" Style="{StaticResource NavIcon}" Tag="Settings" Click="Nav_Click" ToolTip="Settings" Margin="0,6,0,0">
+          <StackPanel><TextBlock Text="⚙" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Settings" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <TextBlock DockPanel.Dock="Top" Text="EARL" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <TextBlock DockPanel.Dock="Top" Text="TWEAKS" Foreground="{StaticResource Accent}" FontSize="9" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel x:Name="NavPanel">
+        <Button Style="{StaticResource NavIcon}" Tag="Dashboard" Click="Nav_Click" ToolTip="Dashboard">
+          <StackPanel><TextBlock Text="🏠" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Home" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Games" Click="Nav_Click" ToolTip="My Games">
+          <StackPanel><TextBlock Text="🎮" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="My Games" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="History" Click="Nav_Click" ToolTip="Game Performance History">
+          <StackPanel><TextBlock Text="📈" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="History" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Booster" Click="Nav_Click" ToolTip="Smart Optimization">
+          <StackPanel><TextBlock Text="⚡" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Optimize" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Live" Click="Nav_Click" ToolTip="Streaming Mode">
+          <StackPanel><TextBlock Text="📡" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Streaming" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Earl" Click="Nav_Click" ToolTip="Recovery Center">
+          <StackPanel><TextBlock Text="🛟" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Recovery" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Monitor" Click="Nav_Click" ToolTip="Performance Monitor">
+          <StackPanel><TextBlock Text="📊" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Monitor" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Processes" Click="Nav_Click" ToolTip="Hardware Intelligence">
+          <StackPanel><TextBlock Text="🖥" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Hardware" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Benchmark" Click="Nav_Click" ToolTip="Benchmark">
+          <StackPanel><TextBlock Text="⏱" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Benchmark" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button Style="{StaticResource NavIcon}" Tag="Advanced" Click="Nav_Click" ToolTip="Gaming Mode">
+          <StackPanel><TextBlock Text="🔧" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Gaming" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+        <Button x:Name="NavAccounts" Style="{StaticResource NavIcon}" Tag="Accounts" Click="Nav_Click" ToolTip="Account &amp; License (admin)" Visibility="Collapsed">
+          <StackPanel><TextBlock Text="👤" FontFamily="Segoe UI Emoji" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="Accounts" FontSize="10.5" Margin="0,3,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/></StackPanel>
+        </Button>
+          </StackPanel>
+        </ScrollViewer>
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Column="1" Margin="16">
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+
+      <!-- global game picker -->
+      <StackPanel x:Name="GameBar" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,6,8">
+        <TextBlock Text="Game:" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource Muted}"/>
+        <ComboBox x:Name="GameBox" Width="280" SelectionChanged="GameBox_Changed"/>
+        <Button Content="Refresh" Click="RefreshGames_Click" Margin="8,0,0,0" Padding="10,2"/>
+        <Button x:Name="OverlayBtn" Content="Overlay: off" Click="Overlay_Click" Margin="8,0,0,0" Padding="10,2" ToolTip="Always-on-top stats window (Ctrl+O). Shows over windowed or borderless games, not exclusive fullscreen."/>
+        <TextBlock x:Name="GameStatus" Margin="12,0,0,0" VerticalAlignment="Center" Foreground="{StaticResource Muted}"/>
+      </StackPanel>
+
+      <Grid Grid.Row="1">
+        <!-- DASHBOARD (premium layout; all element names kept for the code-behind) -->
+        <ScrollViewer x:Name="PageDashboard" VerticalScrollBarVisibility="Auto"><Grid>
+          <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+          <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+          <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="6,0,0,8">
+            <TextBlock Text="Dashboard" FontSize="26" FontWeight="Bold"/>
+            <TextBlock x:Name="TikTokStatus" Margin="24,10,0,0" Foreground="{StaticResource Muted}"/>
+            <TextBlock x:Name="AlertText" Margin="24,10,0,0" Foreground="OrangeRed" FontWeight="SemiBold"/>
+          </StackPanel>
+
+          <!-- system health score -->
+          <Border Grid.Row="1" Style="{StaticResource Card}" BorderBrush="{StaticResource Accent}">
+            <StackPanel>
+              <TextBlock Text="SYSTEM HEALTH" Foreground="{StaticResource Muted}" FontSize="11" FontWeight="SemiBold"/>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="ScoreText" FontSize="44" FontWeight="Bold" Foreground="{StaticResource Accent}"/>
+                <TextBlock Text="/ 100" FontSize="16" Foreground="{StaticResource Muted}" VerticalAlignment="Bottom" Margin="6,0,0,10"/>
+              </StackPanel>
+              <ProgressBar x:Name="ScoreBar" Minimum="0" Maximum="100" Height="8" BorderThickness="0" Foreground="{StaticResource Accent2}" Background="{StaticResource PanelHi}" Margin="0,2,0,6"/>
+              <TextBlock x:Name="ScoreSub" Foreground="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12"/>
+            </StackPanel>
+          </Border>
+          <!-- FPS -->
+          <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Card}">
+            <StackPanel>
+              <TextBlock Text="GAME FPS (measured)" Foreground="{StaticResource Muted}" FontSize="11" FontWeight="SemiBold"/>
+              <TextBlock x:Name="FpsText" FontSize="44" FontWeight="Bold"/>
+              <TextBlock x:Name="FpsSub" Foreground="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12" Margin="0,8,0,0"/>
+            </StackPanel>
+          </Border>
+
+          <!-- CPU -->
+          <Border Grid.Row="2" Style="{StaticResource Card}">
+            <DockPanel>
+              <TextBlock DockPanel.Dock="Top" Text="CPU" Foreground="{StaticResource Muted}" FontSize="11" FontWeight="SemiBold"/>
+              <TextBlock DockPanel.Dock="Top" x:Name="CpuText" FontSize="30" FontWeight="Bold"/>
+              <TextBlock DockPanel.Dock="Top" x:Name="CpuSub" Foreground="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12"/>
+              <Canvas x:Name="CpuGraph" Margin="0,10,0,0" ClipToBounds="True" Height="80"><Polygon x:Name="CpuFill" Fill="#334D7CFF"/><Polyline x:Name="CpuLine" Stroke="{StaticResource Accent}" StrokeThickness="2"/></Canvas>
+            </DockPanel>
+          </Border>
+          <!-- GPU -->
+          <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource Card}">
+            <DockPanel>
+              <TextBlock DockPanel.Dock="Top" Text="GPU" Foreground="{StaticResource Muted}" FontSize="11" FontWeight="SemiBold"/>
+              <TextBlock DockPanel.Dock="Top" x:Name="GpuText" FontSize="30" FontWeight="Bold"/>
+              <TextBlock DockPanel.Dock="Top" x:Name="GpuSub" Foreground="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12"/>
+              <Canvas x:Name="GpuGraph" Margin="0,10,0,0" ClipToBounds="True" Height="80"><Polygon x:Name="GpuFill" Fill="#33A24DFF"/><Polyline x:Name="GpuLine" Stroke="{StaticResource Accent2}" StrokeThickness="2"/></Canvas>
+            </DockPanel>
+          </Border>
+
+          <!-- RAM / VRAM -->
+          <Border Grid.Row="3" Style="{StaticResource Card}">
+            <StackPanel>
+              <TextBlock Text="RAM" Foreground="{StaticResource Muted}" FontSize="11" FontWeight="SemiBold"/>
+              <TextBlock x:Name="RamText" FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap"/>
+              <ProgressBar x:Name="RamBar" Minimum="0" Maximum="100" Height="8" BorderThickness="0" Foreground="{StaticResource Accent}" Background="{StaticResource PanelHi}" Margin="0,6,0,0"/>
+            </StackPanel>
+          </Border>
+          <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource Card}">
+            <StackPanel>
+              <TextBlock Text="VRAM" Foreground="{StaticResource Muted}" FontSize="11" FontWeight="SemiBold"/>
+              <TextBlock x:Name="VramText" FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap"/>
+              <ProgressBar x:Name="VramBar" Minimum="0" Maximum="100" Height="8" BorderThickness="0" Foreground="{StaticResource Accent2}" Background="{StaticResource PanelHi}" Margin="0,6,0,0"/>
+            </StackPanel>
+          </Border>
+
+          <!-- quick optimize -->
+          <Border Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Card}">
+            <DockPanel>
+              <Button DockPanel.Dock="Right" Style="{StaticResource Primary}" Content="QUICK OPTIMIZE" FontSize="20" Padding="26,12" Click="Boost_Click"/>
+              <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="QUICK OPTIMIZE" Foreground="{StaticResource Muted}" FontSize="11" FontWeight="SemiBold"/>
+                <TextBlock x:Name="SuggestText" FontSize="15" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                <Button Content="Use suggested profile" HorizontalAlignment="Left" Margin="0,6,0,0" Padding="10,2" Click="UseSuggestion_Click"/>
+              </StackPanel>
+            </DockPanel>
+          </Border>
+
+          <!-- system specs -->
+          <Grid Grid.Row="5" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+            <Border Style="{StaticResource Card}" Padding="12" Grid.Column="0"><StackPanel><TextBlock Text="MOTHERBOARD" Foreground="{StaticResource Muted}" FontSize="11"/><TextBlock x:Name="SpecBoard" FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,4,0,0"/></StackPanel></Border>
+            <Border Style="{StaticResource Card}" Padding="12" Grid.Column="1"><StackPanel><TextBlock Text="GPU" Foreground="{StaticResource Muted}" FontSize="11"/><TextBlock x:Name="SpecGpu" FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,4,0,0"/></StackPanel></Border>
+            <Border Style="{StaticResource Card}" Padding="12" Grid.Column="2"><StackPanel><TextBlock Text="CPU" Foreground="{StaticResource Muted}" FontSize="11"/><TextBlock x:Name="SpecCpu" FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,4,0,0"/></StackPanel></Border>
+            <Border Style="{StaticResource Card}" Padding="12" Grid.Column="3"><StackPanel><TextBlock Text="RAM" Foreground="{StaticResource Muted}" FontSize="11"/><TextBlock x:Name="SpecRam" FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,4,0,0"/></StackPanel></Border>
+          </Grid>
+        </Grid>
+        </ScrollViewer>
+
+        <!-- FPS BOOSTER -->
+        <ScrollViewer x:Name="PageBooster" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="FPS Booster" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Grid>
+              <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+              <Border Style="{StaticResource Card}" VerticalAlignment="Top">
+                <StackPanel>
+                  <TextBlock Text="Profile" Foreground="{StaticResource Muted}"/>
+                  <ComboBox x:Name="ProfileBox" SelectionChanged="ProfileBox_Changed" Margin="0,4,0,4"/>
+                  <TextBlock x:Name="ProfileDesc" TextWrapping="Wrap" Foreground="{StaticResource Muted}" Margin="0,0,0,8"/>
+                  <CheckBox x:Name="CbPower" Content="Switch Windows power plan"/>
+                  <ComboBox x:Name="PowerBox" SelectedIndex="0" Margin="20,0,0,4"><ComboBoxItem Content="High performance"/><ComboBoxItem Content="Balanced"/></ComboBox>
+                  <CheckBox x:Name="CbGame" Content="Raise game priority (Above Normal)"/>
+                  <CheckBox x:Name="CbTikTok" Content="Raise TikTok LIVE Studio priority (Above Normal)"/>
+                  <CheckBox x:Name="CbBg" Content="Lower priority of optional background apps"/>
+                  <CheckBox x:Name="CbGameMode" Content="Game Mode on + background game recording off"/>
+                  <CheckBox x:Name="CbGpuPref" Content="Run the game on the high-performance GPU (next launch)"/>
+                  <CheckBox x:Name="CbTrim" Content="Trim idle memory of optional background apps"/>
+                  <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBox x:Name="ProfileName" Width="150" Padding="4,2"/>
+                    <Button Content="Save as custom profile" Click="SaveProfile_Click" Margin="8,0,0,0" Padding="8,2"/>
+                    <Button x:Name="DeleteBtn" Content="Delete" Click="DeleteProfile_Click" Margin="8,0,0,0" Padding="8,2"/>
+                  </StackPanel>
+                  <Button Style="{StaticResource Primary}" Content="Preview changes and BOOST FPS" Click="Boost_Click" Margin="0,16,0,8"/>
+                  <Button Content="Restore previous settings" Click="Restore_Click" Padding="10,6"/>
+                  <TextBlock x:Name="BeforeAfter" Margin="0,12,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+                </StackPanel>
+              </Border>
+              <Border Grid.Column="1" Style="{StaticResource Card}" VerticalAlignment="Top">
+                <StackPanel>
+                  <TextBlock Text="Recommendations (advice only, nothing here is changed automatically)" Foreground="{StaticResource Muted}" TextWrapping="Wrap"/>
+                  <TextBox x:Name="RecBox" IsReadOnly="True" TextWrapping="Wrap" Height="220" VerticalScrollBarVisibility="Auto" Margin="0,4,0,4" Background="{StaticResource PanelHi}" Foreground="{StaticResource Text}" BorderThickness="0" Padding="6"/>
+                  <StackPanel Orientation="Horizontal">
+                    <Button Content="Refresh" Click="RefreshRecs_Click" Padding="8,2"/>
+                    <Button Content="Open Game Mode settings" Click="OpenGameMode_Click" Margin="8,0,0,0" Padding="8,2"/>
+                    <Button Content="Open startup apps" Click="OpenStartup_Click" Margin="8,0,0,0" Padding="8,2"/>
+                  </StackPanel>
+                  <TextBlock Text="Log of applied optimizations" Foreground="{StaticResource Muted}" Margin="0,12,0,0"/>
+                  <TextBox x:Name="LogBox" IsReadOnly="True" TextWrapping="Wrap" Height="190" VerticalScrollBarVisibility="Auto" Margin="0,4,0,0" Background="{StaticResource PanelHi}" Foreground="{StaticResource Text}" BorderThickness="0" Padding="6" FontFamily="Consolas"/>
+                </StackPanel>
+              </Border>
+            </Grid>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- LIVE STUDIO -->
+        <ScrollViewer x:Name="PageLive" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="Live Studio Optimizer" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock x:Name="LiveStatus" FontSize="16" FontWeight="SemiBold"/>
+                <TextBlock x:Name="LiveStats" Margin="0,6,0,8" Foreground="{StaticResource Muted}" TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal">
+                  <RadioButton x:Name="RbWithGame" Content="Streaming with a game" IsChecked="True" GroupName="mode"/>
+                  <RadioButton x:Name="RbNoGame" Content="Streaming without a game" GroupName="mode"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                  <TextBlock Text="Your upload speed (Mbps):" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                  <TextBox x:Name="UploadBox" Width="70" Padding="4,2"/>
+                  <Button Content="Update recommendation" Click="RefreshLive_Click" Margin="8,0,0,0" Padding="8,2"/>
+                  <Button x:Name="NetBtn" Content="Test network stability (20 small pings)" Click="NetTest_Click" Margin="8,0,0,0" Padding="8,2"/>
+                </StackPanel>
+                <TextBlock x:Name="NetResult" Margin="0,6,0,0" Foreground="{StaticResource Muted}" TextWrapping="Wrap"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="What is limiting performance right now" Foreground="{StaticResource Muted}"/>
+                <TextBlock x:Name="DiagBox" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="22"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Recommended TikTok LIVE Studio settings" Foreground="{StaticResource Muted}"/>
+                <TextBox x:Name="LiveRec" IsReadOnly="True" TextWrapping="Wrap" Height="230" VerticalScrollBarVisibility="Auto" Margin="0,4,0,8" Background="{StaticResource PanelHi}" Foreground="{StaticResource Text}" BorderThickness="0" Padding="6"/>
+                <StackPanel Orientation="Horizontal">
+                  <Button Style="{StaticResource Primary}" Content="Apply matching PC profile" Click="ApplyLiveProfile_Click"/>
+                  <Button Content="Copy settings" Click="CopyLiveRec_Click" Margin="10,0,0,0" Padding="14,8"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- SYSTEM MONITOR -->
+        <ScrollViewer x:Name="PageMonitor" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="System Monitor" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Border Style="{StaticResource Card}"><TextBlock x:Name="MonText" FontFamily="Consolas" LineHeight="22"/></Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel><TextBlock Text="Top processes by CPU" Foreground="{StaticResource Muted}"/><TextBlock x:Name="TopProcText" FontFamily="Consolas" LineHeight="22" Margin="0,6,0,0"/></StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}"><TextBlock x:Name="HwInfo" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/></Border>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- HARDWARE INTELLIGENCE (live hardware cards + process manager) -->
+        <Grid x:Name="PageProcesses" Visibility="Collapsed">
+          <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+          <StackPanel Orientation="Horizontal" Margin="6,0,0,8">
+            <TextBlock Text="Hardware Intelligence" FontSize="26" FontWeight="Bold"/>
+            <TextBlock Text="Filter:" VerticalAlignment="Center" Foreground="{StaticResource Muted}" Margin="24,6,6,0"/>
+            <TextBox x:Name="ProcFilter" Width="180" Padding="4,2" VerticalAlignment="Center" Margin="0,6,0,0"/>
+          </StackPanel>
+          <StackPanel x:Name="HwHost" Grid.Row="1"/>
+          <Border Grid.Row="2" Style="{StaticResource Card}" Padding="4">
+            <DataGrid x:Name="ProcGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                      Background="Transparent" Foreground="{StaticResource Text}" RowBackground="Transparent"
+                      AlternatingRowBackground="#232830" GridLinesVisibility="None" HeadersVisibility="Column" BorderThickness="0">
+              <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader"><Setter Property="Background" Value="{StaticResource PanelHi}"/><Setter Property="Foreground" Value="{StaticResource Text}"/><Setter Property="Padding" Value="8,6"/></Style>
+              </DataGrid.ColumnHeaderStyle>
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="Process" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="CPU" Binding="{Binding CpuText}" Width="80"/>
+                <DataGridTextColumn Header="Memory" Binding="{Binding MemText}" Width="100"/>
+                <DataGridTextColumn Header="GPU" Binding="{Binding GpuText}" Width="70"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding KindText}" Width="100"/>
+              </DataGrid.Columns>
+            </DataGrid>
+          </Border>
+          <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="6">
+            <Button Style="{StaticResource Primary}" Content="Close selected (optional apps only)" Click="CloseSelected_Click"/>
+            <ComboBox x:Name="ProcPrio" SelectedIndex="0" Width="130" Margin="16,0,0,0" VerticalAlignment="Center">
+              <ComboBoxItem Content="Below Normal"/><ComboBoxItem Content="Normal"/><ComboBoxItem Content="Above Normal"/>
+            </ComboBox>
+            <Button Content="Set priority of selected" Click="SetPrio_Click" Margin="8,0,0,0" Padding="10,5" VerticalAlignment="Center"/>
+            <TextBlock x:Name="ProcMsg" Margin="16,8,0,0" Foreground="{StaticResource Muted}"/>
+          </StackPanel>
+        </Grid>
+
+        <!-- BENCHMARK -->
+        <ScrollViewer x:Name="PageBenchmark" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="Benchmark" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource Muted}" Text="Play the same scene each time (same map, camera, graphics settings, streaming on/off). Record one run as BEFORE, apply a profile on the FPS Booster page, then record AFTER. Pick the game in the Game box above."/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                  <TextBlock Text="Duration (s):" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                  <ComboBox x:Name="BenchDuration" SelectedIndex="1" Width="70"><ComboBoxItem Content="15"/><ComboBoxItem Content="30"/><ComboBoxItem Content="60"/></ComboBox>
+                  <RadioButton x:Name="RbBefore" Content="Record as BEFORE" IsChecked="True" GroupName="bl" Margin="16,0,0,0" VerticalAlignment="Center"/>
+                  <RadioButton x:Name="RbAfter" Content="Record as AFTER" GroupName="bl" VerticalAlignment="Center"/>
+                  <Button Style="{StaticResource Primary}" Content="Run benchmark" Click="RunBench_Click" Margin="12,0,0,0"/>
+                </StackPanel>
+                <TextBlock x:Name="BenchStatus" Margin="0,8,0,0" Foreground="{StaticResource Muted}" TextWrapping="Wrap"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock x:Name="BenchTable" FontFamily="Consolas" LineHeight="22"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                  <Button Content="Export report (.txt)" Click="ExportBench_Click" Padding="10,5"/>
+                  <Button Content="Clear results" Click="ClearBench_Click" Margin="8,0,0,0" Padding="10,5"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}"><TextBlock Foreground="{StaticResource Muted}" TextWrapping="Wrap" Text="FPS is measured from DirectX 11/12 Present calls via Windows event tracing and needs administrator rights; Vulkan, OpenGL and DirectX 9 games are not captured. Results depend on your hardware, game, graphics settings, drivers and streaming setup, and no specific FPS increase is guaranteed. Encoder load is the GPU video-engine load where the GPU reports it."/></Border>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- EARL TWEAKS -->
+        <ScrollViewer x:Name="PageEarl" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="EARL Tweaks" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock TextWrapping="Wrap" Text="Your EARL TWEAKS tool is built into LiveBoost. It opens in its own console window as administrator and is separate from the FPS Booster above."/>
+                <TextBlock Margin="0,10,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}" LineHeight="22" Text="What it does (read from the tool itself): registry optimizations; power tweaks (imports its own power plan, turns off hibernation and fast startup, deletes the default Windows power plans); Windows settings and cleanup; removing built-in apps; NVIDIA, AMD and Intel GPU tweaks; CPU, USB, mouse and keyboard tweaks; disabling telemetry, Cortana, GameDVR, Xbox services, Bluetooth and notifications; a Windows Update blocker; RAM, NTFS, BCD and MMCSS tweaks; and disabling CPU security mitigations."/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Be aware" FontWeight="SemiBold"/>
+                <TextBlock Margin="0,6,0,0" TextWrapping="Wrap" LineHeight="22" Text="• It changes the registry, services and boot settings. LiveBoost's Restore previous settings button does NOT undo these; use the System Restore point the tool creates.&#x0A;• Disabling mitigations and blocking Windows Update lowers your PC's security; keep your antivirus on.&#x0A;• It deletes the Balanced and High performance power plans, so LiveBoost's power plan switch will be skipped afterwards.&#x0A;• Parts of it need internet and the file C:\earltweaks\Exm_Free_Power_Plan_V1.pow; without them those steps are skipped.&#x0A;• Windows Defender may flag programs made with batch-to-EXE converters. That is common for this kind of file."/>
+                <Button Style="{StaticResource Primary}" Content="Launch EARL TWEAKS (administrator)" HorizontalAlignment="Left" Margin="0,14,0,0" Click="LaunchEarl_Click"/>
+                <TextBlock x:Name="EarlStatus" Margin="0,8,0,0" Foreground="{StaticResource Muted}" TextWrapping="Wrap"/>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- ACCOUNTS (admin only) -->
+        <ScrollViewer x:Name="PageAccounts" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="Accounts" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Create a new user" Foreground="{StaticResource Muted}"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,4,0,10" Foreground="{StaticResource Muted}" Text="Credentials are generated automatically with a cryptographically secure random generator. Review them, click Create account, then copy them and give them to the user through a secure channel. Accounts are created on the central EARL TWEAKS account server. The first sign-in registers the user's PC, and the account then works only on that PC until you use Reset device (for example after they replace or upgrade their PC). The password cannot be shown again; use Reset password if it is lost."/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                  <TextBlock Text="Username" Width="80" VerticalAlignment="Center"/>
+                  <TextBox x:Name="AccUser" Width="280" FontFamily="Consolas" FontSize="14" Padding="6,4" MaxLength="32"/>
+                  <Button Content="New" Click="GenUser_Click" Margin="8,0,0,0" Padding="12,5"/>
+                  <Button Content="Copy" Click="CopyUser_Click" Margin="6,0,0,0" Padding="12,5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                  <TextBlock Text="Password" Width="80" VerticalAlignment="Center"/>
+                  <TextBox x:Name="AccPass" Width="280" FontFamily="Consolas" FontSize="14" Padding="6,4" MaxLength="128"/>
+                  <Button Content="New" Click="GenPass_Click" Margin="8,0,0,0" Padding="12,5"/>
+                  <Button Content="Copy" Click="CopyPass_Click" Margin="6,0,0,0" Padding="12,5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                  <TextBlock Text="Role" Width="80" VerticalAlignment="Center"/>
+                  <ComboBox x:Name="AccRole" SelectedIndex="0" Width="120"><ComboBoxItem Content="User"/><ComboBoxItem Content="Admin"/></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                  <Button Content="Generate both" Click="GenBoth_Click" Padding="14,8"/>
+                  <Button Content="Copy both" Click="CopyBoth_Click" Margin="8,0,0,0" Padding="14,8"/>
+                  <Button x:Name="CreateAccBtn" Style="{StaticResource Primary}" Content="Create account" Click="CreateAcc_Click" Margin="12,0,0,0"/>
+                </StackPanel>
+                <TextBlock x:Name="AccStatus" Margin="0,10,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Existing accounts" Foreground="{StaticResource Muted}"/>
+                <DataGrid x:Name="AccGrid" Height="230" Margin="0,8,0,8" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                          Background="Transparent" Foreground="{StaticResource Text}" RowBackground="Transparent"
+                          AlternatingRowBackground="#232830" GridLinesVisibility="None" HeadersVisibility="Column" BorderThickness="0">
+                  <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader"><Setter Property="Background" Value="{StaticResource PanelHi}"/><Setter Property="Foreground" Value="{StaticResource Text}"/><Setter Property="Padding" Value="8,6"/></Style>
+                  </DataGrid.ColumnHeaderStyle>
+                  <DataGrid.Columns>
+                    <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="*"/>
+                    <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="70"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
+                    <DataGridTextColumn Header="Created" Binding="{Binding Created}" Width="140"/>
+                    <DataGridTextColumn Header="Last sign-in" Binding="{Binding LastLogin}" Width="140"/>
+                    <DataGridTextColumn Header="Device" Binding="{Binding Device}" Width="120"/>
+                    <DataGridTextColumn Header="Device last seen" Binding="{Binding DeviceLastSeen}" Width="140"/>
+                  </DataGrid.Columns>
+                </DataGrid>
+                <WrapPanel>
+                  <Button Content="Disable / enable selected" Click="ToggleAcc_Click" Padding="12,6"/>
+                  <Button Content="Reset password" Click="ResetAcc_Click" Margin="8,0,0,0" Padding="12,6"/>
+                  <Button Content="Reset device" Click="ResetDevice_Click" Margin="8,0,0,0" Padding="12,6"/>
+                  <Button Content="Device / sign-in history" Click="History_Click" Margin="8,0,0,0" Padding="12,6"/>
+                  <Button Content="Delete" Click="DeleteAcc_Click" Margin="8,0,0,0" Padding="12,6"/>
+                  <Button Content="Refresh" Click="RefreshAcc_Click" Margin="8,0,0,0" Padding="12,6"/>
+                </WrapPanel>
+                <TextBlock x:Name="AccListMsg" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- ADVANCED -->
+        <ScrollViewer x:Name="PageAdvanced" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="Advanced" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Current Windows gaming settings" Foreground="{StaticResource Muted}"/>
+                <TextBlock x:Name="AdvStatus" Margin="0,6,0,0" LineHeight="22" FontFamily="Consolas"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Memory" Foreground="{StaticResource Muted}"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,4,0,8" Text="Asks Windows to page out idle memory of optional background apps (browsers, launchers). The game and essential apps are never touched and nothing is closed. Effect is temporary: apps reload what they need."/>
+                <Button Style="{StaticResource Primary}" Content="Trim memory now" HorizontalAlignment="Left" Click="TrimMem_Click"/>
+                <TextBlock x:Name="AdvMem" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Temp files" Foreground="{StaticResource Muted}"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,4,0,8" Text="Scans your user temp folder for files older than 24 hours. Cleaning deletes them permanently (files in use are skipped). Only your own temp folder is touched."/>
+                <StackPanel Orientation="Horizontal">
+                  <Button x:Name="TempScanBtn" Content="Scan" Click="ScanTemp_Click" Padding="14,8"/>
+                  <Button x:Name="TempCleanBtn" Style="{StaticResource Primary}" Content="Clean old temp files" Click="CleanTemp_Click" Margin="10,0,0,0" IsEnabled="False"/>
+                </StackPanel>
+                <TextBlock x:Name="AdvTemp" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Session recorder" Foreground="{StaticResource Muted}"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,4,0,8" Text="Records CPU, GPU, temperatures, RAM/VRAM and FPS (if available) once per second while you play or stream, then saves a CSV you can open in Excel to find stutter or overheating."/>
+                <Button x:Name="RecBtn" Style="{StaticResource Primary}" Content="Start recording" HorizontalAlignment="Left" Click="RecToggle_Click"/>
+                <TextBlock x:Name="RecStatus" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Network and quick links" Foreground="{StaticResource Muted}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                  <Button Content="Flush DNS cache" Click="FlushDns_Click" Padding="12,6"/>
+                  <Button Content="Graphics settings" Click="OpenGraphics_Click" Margin="8,0,0,0" Padding="12,6"/>
+                  <Button Content="Power and sleep" Click="OpenPower_Click" Margin="8,0,0,0" Padding="12,6"/>
+                </StackPanel>
+                <TextBlock x:Name="AdvNet" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- SETTINGS -->
+        <!-- MY GAMES -->
+        <ScrollViewer x:Name="PageGames" Visibility="Collapsed" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="GamesHost" Margin="6"/></ScrollViewer>
+        <!-- GAME PERFORMANCE HISTORY -->
+        <ScrollViewer x:Name="PageHistory" Visibility="Collapsed" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="GamesHost2" Margin="6"/></ScrollViewer>
+        <ScrollViewer x:Name="PageSettings" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <TextBlock Text="Settings" FontSize="26" FontWeight="Bold" Margin="6,0,0,8"/>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="My account" Foreground="{StaticResource Muted}"/>
+                <TextBlock x:Name="AcctInfo" FontWeight="SemiBold" Margin="0,4,0,8"/>
+                <TextBlock x:Name="SignedInText" Visibility="Collapsed"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                  <Button x:Name="LogoutBtn" Content="Log out" Click="Logout_Click" Padding="16,5"/>
+                  <TextBlock x:Name="AdminBadge" FontSize="12" Margin="14,0,0,0" VerticalAlignment="Center"/>
+                  <TextBlock x:Name="ActiveBadge" FontSize="12" Foreground="{StaticResource Muted}" Margin="14,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock Text="Shortcuts: Ctrl+B boost · Ctrl+R restore · Ctrl+O overlay   |   v2.5.0" FontSize="11" Foreground="{StaticResource Muted}" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6"><TextBlock Text="Current password" Width="130" VerticalAlignment="Center"/><PasswordBox x:Name="CurPw" Width="220" Padding="4,3" MaxLength="128"/></StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6"><TextBlock Text="New password" Width="130" VerticalAlignment="Center"/><PasswordBox x:Name="NewPw" Width="220" Padding="4,3" MaxLength="128"/></StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8"><TextBlock Text="Repeat new password" Width="130" VerticalAlignment="Center"/><PasswordBox x:Name="NewPw2" Width="220" Padding="4,3" MaxLength="128"/></StackPanel>
+                <Button Content="Change password" Click="ChangePw_Click" HorizontalAlignment="Left" Padding="14,6"/>
+                <TextBlock x:Name="PwMsg" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <CheckBox x:Name="CbAutoSuggest" Content="Suggest a profile when a game or TikTok LIVE Studio is detected" Click="Setting_Changed"/>
+                <CheckBox x:Name="CbFps" Content="Measure game FPS (needs administrator rights)" Click="Setting_Changed"/>
+                <CheckBox x:Name="CbAutoBoost" Content="Auto-boost: apply the suggested profile when a game starts and restore when it closes (no confirmation)" Click="Setting_Changed"/>
+                <CheckBox x:Name="CbStartup" Content="Start LiveBoost with Windows (adds one entry to your per-user startup list)" Click="Startup_Changed"/>
+                <CheckBox x:Name="CbRestoreExit" Content="Restore previous power plan and priorities when LiveBoost closes" Click="Setting_Changed"/>
+                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                  <TextBlock Text="Network test host:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                  <TextBox x:Name="PingHostBox" Width="160" Padding="4,2" LostFocus="Setting_Changed"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock x:Name="AdminText" TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                  <Button Content="Restart as administrator" Click="RestartAdmin_Click" Padding="10,6"/>
+                  <Button Content="Open log folder" Click="OpenLogFolder_Click" Margin="8,0,0,0" Padding="10,6"/>
+                  <Button Content="Restore previous settings" Click="Restore_Click" Margin="8,0,0,0" Padding="10,6"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <TextBlock TextWrapping="Wrap" Foreground="{StaticResource Muted}" Text="Privacy: LiveBoost has no telemetry and no mining. Network traffic is limited to the ping test you start yourself and sign-in / account management with the central account server. It never edits game files, TikTok LIVE Studio files or system-wide registry values, never closes essential processes, and only changes the Windows power plan, process priorities, the per-user Game Mode and background-recording settings and a per-game GPU preference, all of which can be restored. Memory trim and temp cleanup are one-off actions you start yourself. Sign-in accounts are stored on the central account server (Firebase Authentication), never as plain text, so they work on any PC. The overlay and session recorder only read local sensor data; recordings are saved as CSV in your LiveBoost data folder. The separate EARL Tweaks page launches your own EARL TWEAKS tool, which does change the registry and Windows settings; LiveBoost's Restore button does not undo those."/>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>
